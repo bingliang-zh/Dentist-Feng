@@ -28,21 +28,25 @@ if verts:
     ob.show_name = True
     # Link object to scene
     bpy.context.collection.objects.link(ob)
-    me.from_pydata(verts, [], [])
+    # me.from_pydata(verts, [], [])
     # Update mesh with new data
-    me.update()
+    # me.update()
 
     bm = bmesh.new()
     bm.from_mesh(me)
 
     new_column_count = 13
+    vertex_list = []
 
-    # TODO: logic operations
+    for vert in verts:
+        new_vertex = bm.verts.new((vert[0], vert[1], vert[2]))
+        vertex_list.append(new_vertex)
 
-    bm_verts = bm.verts
-    print(len(bm_verts))
+    vertex_list_length = len(vertex_list)
 
-    bm.faces.new([bm_verts[0], bm_verts[1], bm_verts[1 + 13], bm_verts[0+13]])
+    for i in range(vertex_list_length):
+        if (i + 1 + new_column_count < vertex_list_length and (i + 1) % new_column_count != 0):
+            bm.faces.new([vertex_list[i], vertex_list[i + 1], vertex_list[i + 1 + new_column_count], vertex_list[i + new_column_count]])
 
     bm.to_mesh(me)
     bm.free()
