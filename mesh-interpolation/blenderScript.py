@@ -47,6 +47,8 @@ if verts:
     for i in range(vertex_list_length):
         if (i + 1 + new_column_count < vertex_list_length and (i + 1) % new_column_count != 0):
             bm.faces.new([vertex_list[i], vertex_list[i + 1], vertex_list[i + 1 + new_column_count], vertex_list[i + new_column_count]])
+        else:
+            print(i)
 
     bm.to_mesh(me)
     bm.free()
