@@ -4,7 +4,6 @@ import math
 import numpy as np
 from scipy import interpolate
 from scipy.interpolate import Rbf
-import matplotlib.pyplot as plt
 
 filename = '1.csv'
 output_name = '2.csv'
